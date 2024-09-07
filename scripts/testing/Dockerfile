@@ -6,7 +6,7 @@ WORKDIR /build
 COPY $MAIN_FILE_PATH main.go
 RUN CGO_ENABLED=0 GOOS=linux GOARCH=amd64 go build -ldflags "-s -w" -o server main.go
 
-FROM alpine
+FROM alpine:3.20.3
 
 RUN apk add --no-cache curl
 COPY --from=builder /etc/ssl/certs/ca-certificates.crt /etc/ssl/certs/
